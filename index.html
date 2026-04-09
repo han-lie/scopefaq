@@ -12,7 +12,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f6f8;
+      background: #ffffff;
       color: #222;
     }
 
@@ -24,15 +24,13 @@
 
     .search-panel {
       background: #fff;
-      border: 1px solid #d0d7de;
-      border-radius: 12px;
-      padding: 20px;
+      padding: 8px 0 20px;
       margin-bottom: 20px;
     }
 
     .search-title {
       margin: 0 0 16px;
-      font-size: 18px;
+      font-size: 22px;
       font-weight: 700;
       text-align: center;
       line-height: 1.3;
@@ -45,36 +43,37 @@
     .search-row {
       display: flex;
       gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
+      align-items: stretch;
+      width: 100%;
     }
 
     .faq-search-input {
-      flex: 1 1 360px;
-      min-width: 260px;
-      max-width: 700px;
+      flex: 1 1 auto;
+      width: 100%;
       padding: 14px 16px;
       font-size: 15px;
-      border: 1px solid #c7ced6;
-      border-radius: 10px;
+      border: 1px solid #cfd8e3;
+      border-radius: 8px;
       outline: none;
       background: #fff;
     }
 
     .faq-search-input:focus {
-      border-color: #6aa6ff;
-      box-shadow: 0 0 0 3px rgba(106, 166, 255, 0.15);
+      border-color: #9bbbe7;
+      box-shadow: 0 0 0 3px rgba(155, 187, 231, 0.2);
     }
 
     .faq-search-button {
+      flex: 0 0 auto;
       border: none;
-      border-radius: 10px;
-      padding: 14px 18px;
+      border-radius: 8px;
+      padding: 14px 20px;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       background: #1f6feb;
       color: #fff;
+      white-space: nowrap;
     }
 
     .faq-search-button:hover {
@@ -83,10 +82,7 @@
 
     .search-result {
       margin-top: 18px;
-      border: 1px solid #d0d7de;
-      border-radius: 10px;
-      background: #f9fbfd;
-      padding: 16px;
+      padding: 0;
       display: none;
     }
 
@@ -95,76 +91,66 @@
     }
 
     .search-result-label {
-      margin: 0 0 8px;
-      font-size: 12px;
+      margin: 0 0 12px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: #57606a;
+      color: #222;
+    }
+
+    .search-result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-result-item {
+      padding: 14px 16px;
+      background: #fff;
     }
 
     .search-result-question {
-      margin: 0 0 10px;
-      font-size: 18px;
-      font-weight: 700;
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 600;
     }
 
     .search-result-answer {
       margin: 0;
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 13px;
+      line-height: 1.5;
+      font-style: italic;
     }
 
     .faq-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid #d0d7de;
-      border-radius: 12px;
-      overflow: hidden;
+      gap: 28px;
       background: #fff;
     }
 
     .faq-column {
-      padding: 20px;
+      padding: 0;
       min-height: 100%;
-    }
-
-    .faq-column:not(:last-child) {
-      border-right: 2px solid #c7ced6;
-    }
-
-    .group-1 {
-      background: #eaf4ff;
-    }
-
-    .group-2 {
-      background: #eefbf0;
-    }
-
-    .group-3 {
-      background: #fff4e8;
+      background: #fff;
     }
 
     .group-title {
       margin: 0 0 16px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       line-height: 1.3;
     }
 
     .faq-item {
       margin-bottom: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.85);
+      background: #fff;
       overflow: hidden;
     }
 
     .faq-question {
       width: 100%;
       border: none;
-      background: transparent;
+      background: #eaf3ff;
       text-align: left;
       padding: 14px 16px;
       font-size: 15px;
@@ -174,10 +160,11 @@
       justify-content: space-between;
       align-items: center;
       color: #222;
+      border-radius: 6px;
     }
 
     .faq-question:hover {
-      background: rgba(0, 0, 0, 0.04);
+      background: #dfeeff;
     }
 
     .faq-icon {
@@ -193,18 +180,18 @@
 
     .faq-answer {
       display: none;
-      padding: 0 16px 14px 16px;
-      font-size: 14px;
+      padding: 8px 4px 8px 4px;
+      font-size: 13px;
       line-height: 1.5;
+      font-style: italic;
     }
 
     .faq-item.active .faq-answer {
       display: block;
     }
 
-    .faq-item.highlight-match {
-      outline: 3px solid rgba(31, 111, 235, 0.3);
-      outline-offset: 2px;
+    .faq-item.highlight-match .faq-question {
+      box-shadow: 0 0 0 2px rgba(31, 111, 235, 0.25);
     }
 
     .help-widget {
@@ -265,19 +252,23 @@
     @media (max-width: 900px) {
       .faq-grid {
         grid-template-columns: 1fr;
-      }
-
-      .faq-column:not(:last-child) {
-        border-right: none;
-        border-bottom: 2px solid #c7ced6;
+        gap: 20px;
       }
 
       .search-title {
-        font-size: 16px;
+        font-size: 20px;
       }
 
       .group-title {
-        font-size: 13px;
+        font-size: 15px;
+      }
+
+      .search-row {
+        flex-wrap: wrap;
+      }
+
+      .faq-search-button {
+        width: 100%;
       }
 
       .help-tooltip {
@@ -305,14 +296,13 @@
       </div>
 
       <div id="searchResult" class="search-result" aria-live="polite">
-        <p class="search-result-label">Best match</p>
-        <h2 id="resultQuestion" class="search-result-question"></h2>
-        <p id="resultAnswer" class="search-result-answer"></p>
+        <p class="search-result-label">All Matching Responses</p>
+        <div id="searchResultList" class="search-result-list"></div>
       </div>
     </div>
 
     <div class="faq-grid">
-      <div class="faq-column group-1">
+      <div class="faq-column">
         <h2 class="group-title">Questions about Getting Started</h2>
 
         <div class="faq-item">
@@ -386,7 +376,7 @@
         </div>
       </div>
 
-      <div class="faq-column group-2">
+      <div class="faq-column">
         <h2 class="group-title">Questions about Fields within the App</h2>
 
         <div class="faq-item">
@@ -460,7 +450,7 @@
         </div>
       </div>
 
-      <div class="faq-column group-3">
+      <div class="faq-column">
         <h2 class="group-title">I've Completed My Activity Data Entry</h2>
 
         <div class="faq-item">
@@ -520,8 +510,7 @@
     const searchInput = document.getElementById('faqSearchInput');
     const searchButton = document.getElementById('faqSearchButton');
     const searchResult = document.getElementById('searchResult');
-    const resultQuestion = document.getElementById('resultQuestion');
-    const resultAnswer = document.getElementById('resultAnswer');
+    const searchResultList = document.getElementById('searchResultList');
 
     questions.forEach((question) => {
       question.addEventListener('click', () => {
@@ -553,32 +542,39 @@
       return normalizeText(text).split(' ').filter(Boolean);
     }
 
-    function similarityScore(searchText, questionText) {
+    function similarityScore(searchText, questionText, answerText) {
       const searchTokens = tokenize(searchText);
       const questionTokens = tokenize(questionText);
+      const answerTokens = tokenize(answerText);
 
-      if (!searchTokens.length || !questionTokens.length) return 0;
+      if (!searchTokens.length) return 0;
 
-      let overlap = 0;
+      let questionOverlap = 0;
+      let answerOverlap = 0;
+
       searchTokens.forEach((token) => {
-        if (questionTokens.includes(token)) {
-          overlap += 1;
-        }
+        if (questionTokens.includes(token)) questionOverlap += 1;
+        if (answerTokens.includes(token)) answerOverlap += 1;
       });
 
-      const uniqueTokens = new Set([...searchTokens, ...questionTokens]).size;
-      const jaccard = uniqueTokens ? overlap / uniqueTokens : 0;
+      const questionUnion = new Set([...searchTokens, ...questionTokens]).size;
+      const answerUnion = new Set([...searchTokens, ...answerTokens]).size;
+
+      const questionScore = questionUnion ? questionOverlap / questionUnion : 0;
+      const answerScore = answerUnion ? answerOverlap / answerUnion : 0;
 
       const normalizedSearch = normalizeText(searchText);
       const normalizedQuestion = normalizeText(questionText);
+      const normalizedAnswer = normalizeText(answerText);
 
       const substringBonus =
         normalizedQuestion.includes(normalizedSearch) ||
-        normalizedSearch.includes(normalizedQuestion)
-          ? 0.35
+        normalizedSearch.includes(normalizedQuestion) ||
+        normalizedAnswer.includes(normalizedSearch)
+          ? 0.3
           : 0;
 
-      return jaccard + substringBonus;
+      return (questionScore * 0.7) + (answerScore * 0.3) + substringBonus;
     }
 
     function clearHighlights() {
@@ -592,35 +588,48 @@
 
       clearHighlights();
       searchResult.classList.remove('visible');
-
-      if (!query) {
-        return;
-      }
-
-      let bestMatch = null;
-      let bestScore = 0;
-
-      faqData.forEach((entry) => {
-        const score = similarityScore(query, entry.question);
-        if (score > bestScore) {
-          bestScore = score;
-          bestMatch = entry;
-        }
-      });
-
-      if (!bestMatch || bestScore < 0.15) {
-        return;
-      }
+      searchResultList.innerHTML = '';
 
       faqItems.forEach((item) => {
         item.classList.remove('active');
       });
 
-      bestMatch.item.classList.add('highlight-match');
-      bestMatch.item.classList.add('active');
+      if (!query) {
+        return;
+      }
 
-      resultQuestion.textContent = bestMatch.question;
-      resultAnswer.textContent = bestMatch.answer;
+      const matches = faqData
+        .map((entry) => ({
+          ...entry,
+          score: similarityScore(query, entry.question, entry.answer)
+        }))
+        .filter((entry) => entry.score >= 0.08)
+        .sort((a, b) => b.score - a.score);
+
+      if (!matches.length) {
+        return;
+      }
+
+      matches.forEach((match) => {
+        match.item.classList.add('highlight-match');
+        match.item.classList.add('active');
+
+        const resultItem = document.createElement('div');
+        resultItem.className = 'search-result-item';
+
+        const resultQuestion = document.createElement('h3');
+        resultQuestion.className = 'search-result-question';
+        resultQuestion.textContent = match.question;
+
+        const resultAnswer = document.createElement('p');
+        resultAnswer.className = 'search-result-answer';
+        resultAnswer.textContent = match.answer;
+
+        resultItem.appendChild(resultQuestion);
+        resultItem.appendChild(resultAnswer);
+        searchResultList.appendChild(resultItem);
+      });
+
       searchResult.classList.add('visible');
     }
 
