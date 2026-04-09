@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FAQ Sample</title>
+  <title>Scope Activity App FAQ</title>
   <style>
     * {
       box-sizing: border-box;
@@ -20,6 +20,115 @@
       max-width: 1400px;
       margin: 24px auto;
       padding: 0 16px;
+    }
+
+    .search-panel {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .search-title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .search-subtitle {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .faq-search-input {
+      flex: 1 1 360px;
+      min-width: 260px;
+      padding: 14px 16px;
+      font-size: 15px;
+      border: 1px solid #c7ced6;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .faq-search-input:focus {
+      border-color: #6aa6ff;
+      box-shadow: 0 0 0 3px rgba(106, 166, 255, 0.15);
+    }
+
+    .faq-search-button,
+    .faq-clear-button {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .faq-search-button {
+      background: #1f6feb;
+      color: #fff;
+    }
+
+    .faq-search-button:hover {
+      background: #1659c7;
+    }
+
+    .faq-clear-button {
+      background: #e9eef5;
+      color: #222;
+    }
+
+    .faq-clear-button:hover {
+      background: #dbe4ee;
+    }
+
+    .search-result {
+      margin-top: 18px;
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      background: #f9fbfd;
+      padding: 16px;
+      display: none;
+    }
+
+    .search-result.visible {
+      display: block;
+    }
+
+    .search-result-label {
+      margin: 0 0 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #57606a;
+    }
+
+    .search-result-question {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .search-result-answer {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .search-empty {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #666;
     }
 
     .faq-grid {
@@ -61,9 +170,9 @@
 
     .faq-item {
       margin-bottom: 12px;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 8px;
-      background: rgba(255,255,255,0.85);
+      background: rgba(255, 255, 255, 0.85);
       overflow: hidden;
     }
 
@@ -82,13 +191,14 @@
     }
 
     .faq-question:hover {
-      background: rgba(0,0,0,0.04);
+      background: rgba(0, 0, 0, 0.04);
     }
 
     .faq-icon {
       font-size: 18px;
       margin-left: 12px;
       transition: transform 0.2s ease;
+      flex-shrink: 0;
     }
 
     .faq-item.active .faq-icon {
@@ -106,6 +216,11 @@
       display: block;
     }
 
+    .faq-item.highlight-match {
+      outline: 3px solid rgba(31, 111, 235, 0.3);
+      outline-offset: 2px;
+    }
+
     @media (max-width: 900px) {
       .faq-grid {
         grid-template-columns: 1fr;
@@ -120,184 +235,357 @@
 </head>
 <body>
   <div class="faq-wrapper">
+    <div class="search-panel">
+      <h1 class="search-title">Project Managers: Do you have questions about Scope Activity app?</h1>
+      <p class="search-subtitle">Type your question below to find the closest matching FAQ answer.</p>
+
+      <div class="search-row">
+        <input
+          id="faqSearchInput"
+          class="faq-search-input"
+          type="text"
+          placeholder="Type your question here..."
+          aria-label="Search FAQ questions"
+        />
+        <button id="faqSearchButton" class="faq-search-button" type="button">Search</button>
+        <button id="faqClearButton" class="faq-clear-button" type="button">Clear</button>
+      </div>
+
+      <div id="searchEmpty" class="search-empty">
+        Try searching for something like “How do I access the app?”
+      </div>
+
+      <div id="searchResult" class="search-result" aria-live="polite">
+        <p class="search-result-label">Best match</p>
+        <h2 id="resultQuestion" class="search-result-question"></h2>
+        <p id="resultAnswer" class="search-result-answer"></p>
+      </div>
+    </div>
+
     <div class="faq-grid">
-
-      <!-- Column 1 -->
       <div class="faq-column group-1">
-        <h2 class="group-title">Test Group 1</h2>
+        <h2 class="group-title">Questions about Getting Started</h2>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 1
+          <button class="faq-question" type="button">
+            <span>Do I need to enter data in the PDT?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 1, Question 1.
+            As of 7/1/2025 we no longer enter monthly Beneficiaries at the Project level in the PDT. We now enter Activity-level data at the end of each Activity in Scope Activity app.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 2
+          <button class="faq-question" type="button">
+            <span>Why do I need to enter Activity-level data?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 1, Question 2.
+            Americares now requires estimates on unique participants (Reach), so we use Activity-level location and demographics to estimate how many Beneficiaries may be in multiple Activities.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 3
+          <button class="faq-question" type="button">
+            <span>What is an Activity?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 1, Question 3.
+            Activities should have been recorded in your TA Project's PDW. Each has a group of participants, a specific location, and a specified end date. In addition, if you have a Project with multiple Cash Grants, like “Roadmap,” please enter each Grant as a single Activity.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 4
+          <button class="faq-question" type="button">
+            <span>When do I enter Activity data?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 1, Question 4.
+            Activity data should be entered when each Activity has ended.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 5
+          <button class="faq-question" type="button">
+            <span>What information do I need to start data entry on my Activity?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 1, Question 5.
+            You will need number of Beneficiaries, documents supporting these numbers, type of Activity, location, and demographic info. You may save Activity entries as drafts if you need to find additional information.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>How do I access Scope Activity app?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            The link to Scope Activity app is here.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>I don't see my Project listed in Scope Activity app.</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Projects are available to view if you are listed as the Project Manager in Blackbaud Project Record. A list of Projects with Project Managers is here, and instructions on changing the Project Manager is here.
           </div>
         </div>
       </div>
 
-      <!-- Column 2 -->
       <div class="faq-column group-2">
-        <h2 class="group-title">Test Group 2</h2>
+        <h2 class="group-title">Questions about Fields within the App</h2>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 1
+          <button class="faq-question" type="button">
+            <span>What should I know about the Activity Details screen?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 2, Question 1.
+            Definitions of Activity Category and Types have not changed from the PDT and can be found here. If you have difficulties entering the location of your Activity, you can paste the longitude and latitude from a Google Maps search.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 2
+          <button class="faq-question" type="button">
+            <span>What should I know about the Direct Beneficiaries screen?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 2, Question 2.
+            Definitions of Beneficiary terms have not changed from the PDT and can be found here.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 3
+          <button class="faq-question" type="button">
+            <span>What should I know about the Indirect Beneficiaries screen?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 2, Question 3.
+            Definitions of Beneficiary terms have not changed from the PDT and can be found here.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 4
+          <button class="faq-question" type="button">
+            <span>What should I know about the Other Metrics screen?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 2, Question 4.
+            Definitions of Beneficiary terms have not changed from the PDT and can be found here.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 5
+          <button class="faq-question" type="button">
+            <span>Do the numbers need to be unique?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 2, Question 5.
+            Project Managers do not need to estimate unique participants. Country Directors will estimate this based on the non-unique numbers that you submit in Scope Activity app.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>What should I know about uploading documentation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Upload documentation that supports the Beneficiary numbers and Activity details you enter.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>What if I'm missing some information?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            You can save as “Draft” and return to complete later.
           </div>
         </div>
       </div>
 
-      <!-- Column 3 -->
       <div class="faq-column group-3">
-        <h2 class="group-title">Test Group 3</h2>
+        <h2 class="group-title">I've Completed My Activity Data Entry</h2>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 1
+          <button class="faq-question" type="button">
+            <span>I need to correct an Activity that I completed.</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 3, Question 1.
+            You can correct a completed Activity by contacting MERL.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 2
+          <button class="faq-question" type="button">
+            <span>How do I confirm that my Activity was recorded correctly?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 3, Question 2.
+            You can view the results of your Activity data entry here.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 3
+          <button class="faq-question" type="button">
+            <span>How do I view Activity data entry for multiple Activities across my Project?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 3, Question 3.
+            You can view the results of your Activity data entry here.
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">
-            Question 4
+          <button class="faq-question" type="button">
+            <span>How do I submit feedback on my experience?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            This is the response for Test Group 3, Question 4.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            Question 5
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            This is the response for Test Group 3, Question 5.
+            Entering Activity-level data and location details is new for Americares. Please complete this anonymous survey so we can improve the process.
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
   <script>
+    const faqItems = document.querySelectorAll('.faq-item');
     const questions = document.querySelectorAll('.faq-question');
+    const searchInput = document.getElementById('faqSearchInput');
+    const searchButton = document.getElementById('faqSearchButton');
+    const clearButton = document.getElementById('faqClearButton');
+    const searchResult = document.getElementById('searchResult');
+    const searchEmpty = document.getElementById('searchEmpty');
+    const resultQuestion = document.getElementById('resultQuestion');
+    const resultAnswer = document.getElementById('resultAnswer');
 
     questions.forEach((question) => {
       question.addEventListener('click', () => {
         const item = question.parentElement;
         item.classList.toggle('active');
       });
+    });
+
+    const faqData = Array.from(faqItems).map((item) => {
+      const questionText = item.querySelector('.faq-question span').textContent.trim();
+      const answerText = item.querySelector('.faq-answer').textContent.trim();
+
+      return {
+        item,
+        question: questionText,
+        answer: answerText
+      };
+    });
+
+    function normalizeText(text) {
+      return text
+        .toLowerCase()
+        .replace(/[^\w\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function tokenize(text) {
+      return normalizeText(text).split(' ').filter(Boolean);
+    }
+
+    function similarityScore(searchText, questionText) {
+      const searchTokens = tokenize(searchText);
+      const questionTokens = tokenize(questionText);
+
+      if (!searchTokens.length || !questionTokens.length) return 0;
+
+      let overlap = 0;
+      searchTokens.forEach((token) => {
+        if (questionTokens.includes(token)) {
+          overlap += 1;
+        }
+      });
+
+      const uniqueTokens = new Set([...searchTokens, ...questionTokens]).size;
+      const jaccard = uniqueTokens ? overlap / uniqueTokens : 0;
+
+      const normalizedSearch = normalizeText(searchText);
+      const normalizedQuestion = normalizeText(questionText);
+
+      const substringBonus =
+        normalizedQuestion.includes(normalizedSearch) ||
+        normalizedSearch.includes(normalizedQuestion)
+          ? 0.35
+          : 0;
+
+      return jaccard + substringBonus;
+    }
+
+    function clearHighlights() {
+      faqItems.forEach((item) => {
+        item.classList.remove('highlight-match');
+      });
+    }
+
+    function runSearch() {
+      const query = searchInput.value.trim();
+
+      clearHighlights();
+      searchResult.classList.remove('visible');
+
+      if (!query) {
+        searchEmpty.textContent = 'Try searching for something like “How do I access the app?”';
+        return;
+      }
+
+      let bestMatch = null;
+      let bestScore = 0;
+
+      faqData.forEach((entry) => {
+        const score = similarityScore(query, entry.question);
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = entry;
+        }
+      });
+
+      if (!bestMatch || bestScore < 0.15) {
+        searchEmpty.textContent = 'No close match found. Try different wording.';
+        return;
+      }
+
+      bestMatch.item.classList.add('highlight-match');
+      bestMatch.item.classList.add('active');
+
+      resultQuestion.textContent = bestMatch.question;
+      resultAnswer.textContent = bestMatch.answer;
+      searchResult.classList.add('visible');
+      searchEmpty.textContent = 'Showing the closest match from the FAQ.';
+    }
+
+    function clearSearch() {
+      searchInput.value = '';
+      clearHighlights();
+      searchResult.classList.remove('visible');
+      searchEmpty.textContent = 'Try searching for something like “How do I access the app?”';
+
+      faqItems.forEach((item) => {
+        item.classList.remove('active');
+      });
+    }
+
+    searchButton.addEventListener('click', runSearch);
+    clearButton.addEventListener('click', clearSearch);
+
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        runSearch();
+      }
     });
   </script>
 </body>
