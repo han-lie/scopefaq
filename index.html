@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ Sample</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      color: #222;
+    }
+
+    .faq-wrapper {
+      max-width: 1400px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid #d0d7de;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .faq-column {
+      padding: 20px;
+      min-height: 100%;
+    }
+
+    .faq-column:not(:last-child) {
+      border-right: 2px solid #c7ced6;
+    }
+
+    .group-1 {
+      background: #eaf4ff;
+    }
+
+    .group-2 {
+      background: #eefbf0;
+    }
+
+    .group-3 {
+      background: #fff4e8;
+    }
+
+    .group-title {
+      margin: 0 0 16px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .faq-item {
+      margin-bottom: 12px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.85);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      border: none;
+      background: transparent;
+      text-align: left;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      background: rgba(0,0,0,0.04);
+    }
+
+    .faq-icon {
+      font-size: 18px;
+      margin-left: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 16px 14px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-column:not(:last-child) {
+        border-right: none;
+        border-bottom: 2px solid #c7ced6;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="faq-wrapper">
+    <div class="faq-grid">
+
+      <!-- Column 1 -->
+      <div class="faq-column group-1">
+        <h2 class="group-title">Test Group 1</h2>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 1
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 1, Question 1.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 2
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 1, Question 2.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 3
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 1, Question 3.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 4
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 1, Question 4.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 5
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 1, Question 5.
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="faq-column group-2">
+        <h2 class="group-title">Test Group 2</h2>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 1
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 2, Question 1.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 2
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 2, Question 2.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 3
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 2, Question 3.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 4
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 2, Question 4.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 5
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 2, Question 5.
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="faq-column group-3">
+        <h2 class="group-title">Test Group 3</h2>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 1
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 3, Question 1.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 2
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 3, Question 2.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 3
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 3, Question 3.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 4
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 3, Question 4.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Question 5
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            This is the response for Test Group 3, Question 5.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const questions = document.querySelectorAll('.faq-question');
+
+    questions.forEach((question) => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
