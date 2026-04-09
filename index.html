@@ -19,7 +19,7 @@
     .faq-wrapper {
       max-width: 1400px;
       margin: 24px auto;
-      padding: 0 16px;
+      padding: 0 16px 48px;
     }
 
     .search-panel {
@@ -31,31 +31,34 @@
     }
 
     .search-title {
-      margin: 0 0 8px;
-      font-size: 24px;
+      margin: 0 0 16px;
+      font-size: 18px;
       font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
     }
 
-    .search-subtitle {
-      margin: 0 0 16px;
-      font-size: 14px;
-      color: #555;
+    .search-title-light {
+      font-weight: 400;
     }
 
     .search-row {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .faq-search-input {
       flex: 1 1 360px;
       min-width: 260px;
+      max-width: 700px;
       padding: 14px 16px;
       font-size: 15px;
       border: 1px solid #c7ced6;
       border-radius: 10px;
       outline: none;
+      background: #fff;
     }
 
     .faq-search-input:focus {
@@ -63,32 +66,19 @@
       box-shadow: 0 0 0 3px rgba(106, 166, 255, 0.15);
     }
 
-    .faq-search-button,
-    .faq-clear-button {
+    .faq-search-button {
       border: none;
       border-radius: 10px;
       padding: 14px 18px;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-    }
-
-    .faq-search-button {
       background: #1f6feb;
       color: #fff;
     }
 
     .faq-search-button:hover {
       background: #1659c7;
-    }
-
-    .faq-clear-button {
-      background: #e9eef5;
-      color: #222;
-    }
-
-    .faq-clear-button:hover {
-      background: #dbe4ee;
     }
 
     .search-result {
@@ -125,12 +115,6 @@
       line-height: 1.6;
     }
 
-    .search-empty {
-      margin-top: 12px;
-      font-size: 14px;
-      color: #666;
-    }
-
     .faq-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -164,8 +148,9 @@
 
     .group-title {
       margin: 0 0 16px;
-      font-size: 22px;
+      font-size: 14px;
       font-weight: 700;
+      line-height: 1.3;
     }
 
     .faq-item {
@@ -183,11 +168,12 @@
       text-align: left;
       padding: 14px 16px;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 400;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: #222;
     }
 
     .faq-question:hover {
@@ -221,6 +207,61 @@
       outline-offset: 2px;
     }
 
+    .help-widget {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1000;
+    }
+
+    .help-trigger {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: #1f6feb;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .help-trigger:hover {
+      background: #1659c7;
+    }
+
+    .help-tooltip {
+      position: absolute;
+      right: 0;
+      bottom: 56px;
+      width: 280px;
+      background: #fff;
+      color: #222;
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      font-size: 14px;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .help-widget:hover .help-tooltip,
+    .help-widget:focus-within .help-tooltip {
+      display: block;
+    }
+
+    .help-tooltip a {
+      color: #1f6feb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .help-tooltip a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 900px) {
       .faq-grid {
         grid-template-columns: 1fr;
@@ -230,29 +271,37 @@
         border-right: none;
         border-bottom: 2px solid #c7ced6;
       }
+
+      .search-title {
+        font-size: 16px;
+      }
+
+      .group-title {
+        font-size: 13px;
+      }
+
+      .help-tooltip {
+        width: 240px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="faq-wrapper">
     <div class="search-panel">
-      <h1 class="search-title">Project Managers: Do you have questions about Scope Activity app?</h1>
-      <p class="search-subtitle">Type your question below to find the closest matching FAQ answer.</p>
+      <h1 class="search-title">
+        <span class="search-title-light">Project Managers:</span>
+        Do you have questions about Scope Activity app?
+      </h1>
 
       <div class="search-row">
         <input
           id="faqSearchInput"
           class="faq-search-input"
           type="text"
-          placeholder="Type your question here..."
           aria-label="Search FAQ questions"
         />
         <button id="faqSearchButton" class="faq-search-button" type="button">Search</button>
-        <button id="faqClearButton" class="faq-clear-button" type="button">Clear</button>
-      </div>
-
-      <div id="searchEmpty" class="search-empty">
-        Try searching for something like “How do I access the app?”
       </div>
 
       <div id="searchResult" class="search-result" aria-live="polite">
@@ -457,14 +506,20 @@
     </div>
   </div>
 
+  <div class="help-widget">
+    <button class="help-trigger" type="button" aria-label="Help">?</button>
+    <div class="help-tooltip">
+      Can’t find the answer to your question?
+      <a href="mailto:slie@americares.org">Chat with MERL</a>
+    </div>
+  </div>
+
   <script>
     const faqItems = document.querySelectorAll('.faq-item');
     const questions = document.querySelectorAll('.faq-question');
     const searchInput = document.getElementById('faqSearchInput');
     const searchButton = document.getElementById('faqSearchButton');
-    const clearButton = document.getElementById('faqClearButton');
     const searchResult = document.getElementById('searchResult');
-    const searchEmpty = document.getElementById('searchEmpty');
     const resultQuestion = document.getElementById('resultQuestion');
     const resultAnswer = document.getElementById('resultAnswer');
 
@@ -539,7 +594,6 @@
       searchResult.classList.remove('visible');
 
       if (!query) {
-        searchEmpty.textContent = 'Try searching for something like “How do I access the app?”';
         return;
       }
 
@@ -555,9 +609,12 @@
       });
 
       if (!bestMatch || bestScore < 0.15) {
-        searchEmpty.textContent = 'No close match found. Try different wording.';
         return;
       }
+
+      faqItems.forEach((item) => {
+        item.classList.remove('active');
+      });
 
       bestMatch.item.classList.add('highlight-match');
       bestMatch.item.classList.add('active');
@@ -565,22 +622,9 @@
       resultQuestion.textContent = bestMatch.question;
       resultAnswer.textContent = bestMatch.answer;
       searchResult.classList.add('visible');
-      searchEmpty.textContent = 'Showing the closest match from the FAQ.';
-    }
-
-    function clearSearch() {
-      searchInput.value = '';
-      clearHighlights();
-      searchResult.classList.remove('visible');
-      searchEmpty.textContent = 'Try searching for something like “How do I access the app?”';
-
-      faqItems.forEach((item) => {
-        item.classList.remove('active');
-      });
     }
 
     searchButton.addEventListener('click', runSearch);
-    clearButton.addEventListener('click', clearSearch);
 
     searchInput.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
