@@ -121,6 +121,18 @@
       font-style: italic;
     }
 
+    .search-result-answer a,
+    .faq-answer a {
+      color: #1f6feb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .search-result-answer a:hover,
+    .faq-answer a:hover {
+      text-decoration: underline;
+    }
+
     .faq-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -136,6 +148,9 @@
 
     .group-title {
       margin: 0 0 16px;
+      min-height: 42px;
+      display: flex;
+      align-items: flex-end;
       font-size: 16px;
       font-weight: 700;
       line-height: 1.3;
@@ -260,6 +275,7 @@
       }
 
       .group-title {
+        min-height: 0;
         font-size: 15px;
       }
 
@@ -371,7 +387,7 @@
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            Projects are available to view if you are listed as the Project Manager in Blackbaud Project Record. A list of Projects with Project Managers is here, and instructions on changing the Project Manager is here.
+            Projects are available to view if you are listed as the Project Manager in Blackbaud Project Record. A list of Projects with Project Managers is here, and instructions on changing the Project Manager is <a href="https://americares-my.sharepoint.com/personal/slie_americares_org/Documents/../../../:v:/g/personal/slie_americares_org/IQAYR4Zb91zvRpTfRk6k_cxJAXXIBv39io-LP5n-kp-byFs?e=VqUDzb" target="_blank" rel="noopener noreferrer">here</a>.
           </div>
         </div>
       </div>
@@ -521,12 +537,13 @@
 
     const faqData = Array.from(faqItems).map((item) => {
       const questionText = item.querySelector('.faq-question span').textContent.trim();
-      const answerText = item.querySelector('.faq-answer').textContent.trim();
+      const answerElement = item.querySelector('.faq-answer');
 
       return {
         item,
         question: questionText,
-        answer: answerText
+        answer: answerElement.textContent.trim(),
+        answerHtml: answerElement.innerHTML
       };
     });
 
@@ -623,7 +640,7 @@
 
         const resultAnswer = document.createElement('p');
         resultAnswer.className = 'search-result-answer';
-        resultAnswer.textContent = match.answer;
+        resultAnswer.innerHTML = match.answerHtml;
 
         resultItem.appendChild(resultQuestion);
         resultItem.appendChild(resultAnswer);
